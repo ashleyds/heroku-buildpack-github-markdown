@@ -1,21 +1,56 @@
 #!/bin/bash
+set -x
 
 if [ -z "$STYLESHEET_URL" ]; then
     echo "       Setting STYLESHEET_URL to default value"
-    STYLESHEET_URL="https://gist.github.com/raw/4579178/styles.css"
+#    STYLESHEET_URL="https://gist.github.com/raw/4579178/styles.css"
+#    STYLESHEET_URL="https://gist.github.com/raw/4570328/styles.css"
+    STYLESHEET_URL="//origami-buildservice-qa.herokuapp.com/bundles/css?modules=o-techdocs@^5.0.0"
 fi
 
-TEMPLATE_HEADER="<html><head><link href=\"$STYLESHEET_URL\" media=\"all\" rel=\"stylesheet\" type=\"text/css\" /></head><body>"
-TEMPLATE_FOOTER="</body></html>"
+#TEMPLATE_HEADER="<html><head><link href=\"$STYLESHEET_URL\" media=\"all\" rel=\"stylesheet\" type=\"text/css\" /></head><body>"
+#TEMPLATE_FOOTER="</body></html>"
 
-cd $1
+read -d '' TEMPLATE_HEADER <<- EOF
+ <!DOCTYPE html>
+ <html>
+ <head>
+   <meta charset="utf-8">
+   <title>Architectural Patterns List</title>
+   <link rel="stylesheet" href="//origami-buildservice-qa.herokuapp.com/bundles/css?modules=o-techdocs@^5.0.0" />
+   <script src="//origami-buildservice-qa.herokuapp.com/bundles/js?modules=o-techdocs@^5.0.0"></script>
+  
+ </head>
+ <body class="o-techdocs">
+  
+  
+   <header data-o-component="o-header" class="o-header">
+ 	<div class="o-header__container">
+		<div class="o-header__inner">
+			<div class="o-header__primary">
+				<div class="o-header__primary__left">
+					<a class="o-header__logo o-header__logo--ft" href="http://www.ft.com">
+						<abbr title="Financial Times">FT</abbr>
+						<h1 class="o-header__title">Architectural Patterns</h1>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+ </header>
+ <div class="o-techdocs-content">
+EOF
 
-for f in *.md
+TEMPLATE_FOOTER="</div></body></html>"
+
+
+#cd $1
+
+for f in $(find . -name "*.md")
 do
+  echo $f
   echo -n "       Sending $f to GitHub for rendering..."
   HTML=$(curl --data-binary @$f -H "Content-Type:text/plain" -s https://api.github.com/markdown/raw)
-  echo $TEMPLATE_HEADER >> echo "$HTML" >> echo $TEMPLATE_FOOTER > $f.html
-  rename s/.md// $f.html
-  rm $f
+  echo $TEMPLATE_HEADER >> echo "$HTML" >> echo $TEMPLATE_FOOTER > $(echo $f | sed -e 's/.md$/.html/')
   echo "done"
 done
