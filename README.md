@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # GitHub Markdown Buildpack
 
 This [Heroku buildpack](https://github.com/rwdaigle/heroku-buildpack-github-markdown) allows you to deploy raw markdown file(s) which will get rendered with GitHub's Markdown parser and served via a simple web server. See this project's [README rendered here](http://afternoon-peak-2333.herokuapp.com/README.html).
@@ -50,3 +51,7 @@ $ git push heroku master
 ## Notes
 
 While this buildpack is completely functional it is mostly a proof of concept. Please send any interesting derivatives to [@rwdaigle](https://twitter.com/rwdaigle).
+=======
+# heroku-buildpack-github-markdown
+playing based on https://github.com/rwdaigle/heroku-buildpack-github-markdown 
+>>>>>>> 9ff6a3ca0757532fcf4a3e78ae4830a8cb525964
