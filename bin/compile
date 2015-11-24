@@ -1,15 +1,11 @@
 #!/bin/bash
-set -x
 
 if [ -z "$STYLESHEET_URL" ]; then
     echo "       Setting STYLESHEET_URL to default value"
 #    STYLESHEET_URL="https://gist.github.com/raw/4579178/styles.css"
-#    STYLESHEET_URL="https://gist.github.com/raw/4570328/styles.css"
     STYLESHEET_URL="//origami-buildservice-qa.herokuapp.com/bundles/css?modules=o-techdocs@^5.0.0"
 fi
 
-#TEMPLATE_HEADER="<html><head><link href=\"$STYLESHEET_URL\" media=\"all\" rel=\"stylesheet\" type=\"text/css\" /></head><body>"
-#TEMPLATE_FOOTER="</body></html>"
 
 read -d '' TEMPLATE_HEADER <<- EOF
  <!DOCTYPE html>
@@ -44,7 +40,7 @@ EOF
 TEMPLATE_FOOTER="</div></body></html>"
 
 
-#cd $1
+cd $1
 
 for f in $(find . -name "*.md")
 do
