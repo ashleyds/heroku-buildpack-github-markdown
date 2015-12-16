@@ -25,7 +25,7 @@ read -d '' TEMPLATE_HEADER <<- EOF
 		<div class="o-header__inner">
 			<div class="o-header__primary">
 				<div class="o-header__primary__left">
-					<a class="o-header__logo o-header__logo--ft" href="http://www.ft.com">
+					<a class="o-header__logo o-header__logo--ft" href="http://patterns.ft.com">
 						<abbr title="Financial Times">FT</abbr>
 						<h1 class="o-header__title">Architectural Patterns</h1>
 					</a>
